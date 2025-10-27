@@ -16,9 +16,19 @@ test:
   database: catalogo_filmes_test
 
 production:
-  <<: *default
-  database: <%= ENV['CATALOGO_FILMES_DATABASE_NAME'] %>
-  username: <%= ENV['CATALOGO_FILMES_DATABASE_USERNAME'] %>
-  password: <%= ENV['CATALOGO_FILMES_DATABASE_PASSWORD'] %>
-  host: <%= ENV['CATALOGO_FILMES_DATABASE_HOST'] %>
-  port: <%= ENV['CATALOGO_FILMES_DATABASE_PORT'] || 5432 %>
+  primary:
+    <<: *default
+    database: <%= ENV['CATALOGO_FILMES_DATABASE_NAME'] %>
+    username: <%= ENV['CATALOGO_FILMES_DATABASE_USERNAME'] %>
+    password: <%= ENV['CATALOGO_FILMES_DATABASE_PASSWORD'] %>
+    host: <%= ENV['CATALOGO_FILMES_DATABASE_HOST'] %>
+    port: <%= ENV['CATALOGO_FILMES_DATABASE_PORT'] || 5432 %>
+
+  cable:
+    <<: *default
+    database: <%= ENV['CATALOGO_FILMES_DATABASE_NAME'] %>
+    username: <%= ENV['CATALOGO_FILMES_DATABASE_USERNAME'] %>
+    password: <%= ENV['CATALOGO_FILMES_DATABASE_PASSWORD'] %>
+    host: <%= ENV['CATALOGO_FILMES_DATABASE_HOST'] %>
+    port: <%= ENV['CATALOGO_FILMES_DATABASE_PORT'] || 5432 %>
+
