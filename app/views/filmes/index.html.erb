@@ -1,0 +1,96 @@
+<div class="d-flex flex-column min-vh-100 justify-content-center align-items-center text-center p-3" style="gap: 20px;">
+  <p style="color: lightgreen"><%= notice %></p>
+
+  <h1 class="text-light mb-4">🎬 Catálogo de Filmes</h1>
+
+  <!-- Botões de navegação -->
+  <div class="mb-4">
+    <% if user_signed_in? %>
+      <%= link_to "Cadastrar novo filme", new_filme_path, class: "btn btn-primary me-2 mb-2" %>
+      <%= link_to "Editar perfil", edit_user_registration_path, class: "btn btn-secondary me-2 mb-2" %>
+      <%= link_to "Sair", destroy_user_session_path, data: { turbo_method: :delete }, class: "btn btn-danger mb-2" %>
+    <% else %>
+      <%= link_to "Entrar", new_user_session_path, class: "btn btn-primary me-2 mb-2" %>
+      <%= link_to "Cadastrar-se", new_user_registration_path, class: "btn btn-success mb-2" %>
+    <% end %>
+  </div>
+
+  <!-- Lista de filmes -->
+  <div id="filmes" class="d-flex flex-wrap justify-content-center gap-4">
+    <% @filmes.each do |filme| %>
+      <div class="card bg-dark text-light" style="flex: 0 1 calc(33.333% - 20px); border-radius: 10px; border: 1px solid #444; box-sizing: border-box;">
+        <div class="card-body d-flex flex-column justify-content-between h-100">
+          <div>
+            <h5 class="card-title"><%= filme.titulo %></h5>
+            <p class="card-text"><strong>Ano:</strong> <%= filme.ano %></p>
+            <p class="card-text"><strong>Diretor:</strong> <%= filme.diretor %></p>
+            <p class="card-text"><strong>Duração:</strong> <%= filme.duracao %> min</p>
+            <p class="card-text"><strong>Sinopse:</strong> <%= truncate(filme.sinopse, length: 100) %></p>
+          </div>
+
+          <div class="mt-3">
+            <%= link_to "Ver detalhes", filme_path(filme), class: "btn btn-outline-light btn-sm mt-2" %>
+
+            <% if user_signed_in? && filme.user == current_user %>
+              <%= link_to "Editar", edit_filme_path(filme), class: "btn btn-outline-warning btn-sm mt-2 ms-1" %>
+              <%= link_to "Excluir", filme_path(filme),
+                    data: { turbo_method: :delete, turbo_confirm: "Tem certeza que deseja excluir este filme?" },
+                    class: "btn btn-outline-danger btn-sm mt-2 ms-1" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Paginação -->
+  <div class="mt-4">
+    <%= paginate @filmes %>
+  </div>
+</div>
+
+<!-- Corpo dark e estilos dos botões -->
+<style>
+  body {
+    background-color: #121212;
+    color: #f1f1f1;
+    margin: 0;
+  }
+
+  .btn-outline-light {
+    color: #f1f1f1;
+    border-color: #f1f1f1;
+  }
+
+  .btn-outline-light:hover {
+    background-color: #f1f1f1;
+    color: #121212;
+  }
+
+  .btn-outline-warning {
+    color: #ffc107;
+    border-color: #ffc107;
+  }
+
+  .btn-outline-warning:hover {
+    background-color: #ffc107;
+    color: #121212;
+  }
+
+  .btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+  }
+
+  .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: #121212;
+  }
+
+  /* Responsivo: 1 card por linha em telas muito pequenas */
+  @media (max-width: 768px) {
+    #filmes > .card {
+      flex: 0 1 100% !important;
+    }
+  }
+</style>

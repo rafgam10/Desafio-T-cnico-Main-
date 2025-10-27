@@ -1,0 +1,55 @@
+<div class="d-flex flex-column min-vh-100 justify-content-center align-items-center p-3" style="gap: 20px; max-width: 400px; margin: auto;">
+  <h2 class="text-light mb-3">🔑 Redefinir Senha</h2>
+
+  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
+    <%= f.hidden_field :reset_password_token %>
+
+    <div class="mb-2 w-100">
+      <%= f.label :password, "Nova Senha", class: "text-light" %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control bg-secondary text-light border-0" %>
+    </div>
+
+    <div class="mb-2 w-100">
+      <%= f.label :password_confirmation, "Confirme a Senha", class: "text-light" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control bg-secondary text-light border-0" %>
+    </div>
+
+    <%= f.submit "Redefinir Senha", class: "btn btn-primary w-100" %>
+  <% end %>
+
+  <%= link_to "Voltar para login", new_session_path(resource_name), class: "btn btn-outline-light mt-3 w-100" %>
+</div>
+
+<!-- Estilos Dark -->
+<style>
+  body {
+    background-color: #121212;
+    color: #f1f1f1;
+    margin: 0;
+  }
+
+  .form-control.bg-secondary {
+    background-color: #1e1e1e !important;
+    color: #f1f1f1;
+  }
+
+  .btn-outline-light {
+    color: #f1f1f1;
+    border-color: #f1f1f1;
+  }
+  .btn-outline-light:hover {
+    background-color: #f1f1f1;
+    color: #121212;
+  }
+
+  .btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+    color: #fff;
+  }
+</style>

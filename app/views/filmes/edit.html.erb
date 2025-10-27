@@ -1,0 +1,61 @@
+<div class="d-flex flex-column min-vh-100 justify-content-center align-items-center p-3" style="gap: 20px;">
+  <h1 class="text-light mb-4">✏️ <%= @filme.new_record? ? "Cadastrar Filme" : "Editar Filme" %></h1>
+
+  <div class="card bg-dark text-light p-4 rounded shadow" style="width: 500px;">
+    <%= form_with(model: @filme, local: true) do |f| %>
+      <div class="mb-3">
+        <%= f.label :titulo %>
+        <%= f.text_field :titulo, class: "form-control bg-secondary text-light border-0" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :ano, "Ano de Lançamento" %>
+        <%= f.number_field :ano, class: "form-control bg-secondary text-light border-0" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :duracao, "Duração (minutos)" %>
+        <%= f.number_field :duracao, class: "form-control bg-secondary text-light border-0" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :diretor %>
+        <%= f.text_field :diretor, class: "form-control bg-secondary text-light border-0" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :sinopse %>
+        <%= f.text_area :sinopse, rows: 5, class: "form-control bg-secondary text-light border-0" %>
+      </div>
+
+      <%= f.submit @filme.new_record? ? "Cadastrar" : "Atualizar", class: "btn btn-primary w-100" %>
+    <% end %>
+
+    <div class="text-center mt-3">
+      <%= link_to "Voltar para filmes", filmes_path, class: "btn btn-outline-light" %>
+    </div>
+  </div>
+</div>
+
+<!-- Corpo dark -->
+<style>
+  body {
+    background-color: #121212;
+    color: #f1f1f1;
+    margin: 0;
+  }
+
+  .form-control.bg-secondary {
+    background-color: #1e1e1e !important;
+  }
+
+  .btn-outline-light {
+    color: #f1f1f1;
+    border-color: #f1f1f1;
+  }
+
+  .btn-outline-light:hover {
+    background-color: #f1f1f1;
+    color: #121212;
+  }
+</style>
